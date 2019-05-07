@@ -1,4 +1,29 @@
 {
   "name": "@asutov/nagan-types",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "description": "Nagan document types",
+  "scripts": {
+    "build": "tsc"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:flamenkito/nagan-types.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Aleksey Sutov",
+    "email": "asutov@outlook.com",
+    "url": "https://www.linkedin.com/in/flamenkito"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flamenkito/nagan-types/issues"
+  },
+  "homepage": "https://github.com/flamenkito/nagan-types#readme",
+  "dependencies": {
+    "serializr": "^1.5.1",
+    "typescript": "^3.4.5"
+  }
 }
