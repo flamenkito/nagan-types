@@ -1,6 +1,7 @@
 import { serializable, list, object, deserialize } from 'serializr';
 
 import { TypeDocument } from './type.document';
+import { Serializers } from './serializers';
 
 export class Element {
   @serializable selector: string;
@@ -14,7 +15,7 @@ export class ElementsDocument implements TypeDocument {
   // TypeDocument
   @serializable _id: string;
   @serializable _rev: string;
-  @serializable type = 'elements';
+  @serializable(Serializers.value('elements')) type = 'elements';
 
   // ServiceDocument
   @serializable(list(object(Element))) elements: Element[];

@@ -1,20 +1,14 @@
 import { serializable, deserialize, object, list, primitive } from 'serializr';
 
+import { Nagan } from './nagan';
 import { TypeDocument } from './type.document';
-
-export class Nagan {
-  @serializable state: string;
-  @serializable defaultMap: string;
-  @serializable(list(primitive())) maps: string[];
-  @serializable(list(primitive())) layers: string[];
-  @serializable(list(primitive())) services: string[];
-}
+import { Serializers } from './serializers';
 
 export class UserDocument implements TypeDocument {
   // TypeDocument
   @serializable _id: string;
   @serializable _rev: string;
-  @serializable type = 'user';
+  @serializable(Serializers.value('user')) type = 'user';
 
   // UserDocument
   @serializable name: string;
@@ -22,7 +16,7 @@ export class UserDocument implements TypeDocument {
   @serializable allowedInstances: number;
   @serializable description: string;
   @serializable avatar: string;
-  @serializable(object(Nagan)) nagan: Nagan;
+  @serializable(object(Nagan.Access)) access: Nagan.Access;
 
   static deserialize(data: Partial<UserDocument>): UserDocument {
     return deserialize(UserDocument, data);

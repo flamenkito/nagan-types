@@ -1,12 +1,13 @@
 import { serializable, deserialize } from 'serializr';
 
 import { TypeDocument } from './type.document';
+import { Serializers } from './serializers';
 
 export class LayerDocument implements TypeDocument {
   // TypeDocument
   @serializable _id: string;
   @serializable _rev: string;
-  @serializable type = 'layer';
+  @serializable(Serializers.value('layer')) type = 'layer';
 
   // LayerDocument
   @serializable enabled: boolean;
