@@ -33,9 +33,9 @@ interface ServiceDocument extends TypeDocument {
 }
 ```
 
-## Nagan Collection
+## Access Collection
 
-{{couchdb}}/nagan
+{{couchdb}}/Access
 
 ### Elements Document
 
@@ -130,12 +130,12 @@ interface UserDocument extends TypeDocument {
   allowedInstances: number;
   description: string;
   avatar: string;
-  nagan: Nagan;
+  access: Access;
 }
 ```
 
 ```ts
-interface Nagan {
+interface Access {
   state: string;
   defaultMap: string;
   maps: string[];
