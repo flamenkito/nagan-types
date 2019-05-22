@@ -1,8 +1,39 @@
-import { serializable, deserialize, list, primitive, object } from 'serializr';
+import {
+  serializable,
+  deserialize,
+  list,
+  primitive,
+  object,
+  custom
+} from 'serializr';
 
 import { Nagan } from './nagan';
 import { TypeDocument } from './type.document';
 import { Serializers } from './serializers';
+
+const asOptions = custom(Serializers.error, value => {
+  switch (value.type) {
+    case 'image':
+      return deserialize(ImageOptions, value);
+    case 'leaflet':
+      return deserialize(LeafletOptions, value);
+    default:
+      throw new Error('Invalid map type');
+  }
+});
+
+export class LeafletOptions {
+  @serializable(Serializers.value('leaflet')) type = 'leaflet';
+  @serializable dpi: number;
+  @serializable(list(primitive())) center: [number, number];
+  @serializable zoom: number;
+}
+
+export class ImageOptions {
+  @serializable(Serializers.value('image')) type = 'image';
+  @serializable url: string;
+  @serializable(Serializers.anyType) style: any;
+}
 
 export class MapDocument implements TypeDocument {
   // TypeDocument
@@ -19,26 +50,9 @@ export class MapDocument implements TypeDocument {
   @serializable(list(primitive())) visibleLayerIds: string[];
   @serializable(list(object(Nagan.Widget))) widgets: Nagan.Widget[];
 
-  @serializable(Serializers.mapOptions) options: MapOptions;
+  @serializable(asOptions) options: LeafletOptions | ImageOptions;
 
   static from(data: Partial<MapDocument>): MapDocument {
     return deserialize(MapDocument, data);
   }
 }
-
-export namespace MapDocument {
-  export class LeafletOptions {
-    @serializable(Serializers.value('leaflet')) type = 'leaflet';
-    @serializable dpi: number;
-    @serializable(list(primitive())) center: [number, number];
-    @serializable zoom: number;
-  }
-
-  export class ImageOptions {
-    @serializable(Serializers.value('image')) type = 'image';
-    @serializable url: string;
-    @serializable(Serializers.anyType) style: any;
-  }
-}
-
-type MapOptions = MapDocument.LeafletOptions | MapDocument.ImageOptions;

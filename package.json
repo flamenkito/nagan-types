@@ -1,12 +1,18 @@
 {
   "name": "@asutov/nagan-types",
-  "version": "1.0.14",
+  "version": "1.0.17",
   "description": "Nagan document types",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "watch-build": "tsc -w",
+    "watch-node": "nodemon",
+    "watch": "tsc && npm-run-all --parallel watch-build watch-node"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com:flamenkito/nagan-types.git"
@@ -26,5 +32,12 @@
     "@types/leaflet": "^1.4.4",
     "serializr": "^1.5.1",
     "typescript": "^3.4.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.0",
+    "npm-run-all": "^4.1.5",
+    "ts-jest": "^24.0.2"
   }
 }

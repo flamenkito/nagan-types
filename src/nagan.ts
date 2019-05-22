@@ -1,9 +1,24 @@
-import { serializable, list, primitive } from 'serializr';
+import { serializable, list, primitive, custom, deserialize } from 'serializr';
 
 import { Serializers } from './serializers';
 import { TypeDocument } from './type.document';
 
 type Mapper<State> = (subscriptions: TypeDocument[]) => State;
+
+const asPosition = custom(Serializers.error, value => {
+  switch (value.type) {
+    case 'point':
+      return deserialize(Nagan.Widget.Point, value);
+    case 'latlng':
+      return deserialize(Nagan.Widget.LatLng, value);
+    case 'fixed':
+      return deserialize(Nagan.Widget.Fixed, value);
+    default:
+      throw new Error('Invalid position type');
+  }
+});
+
+const asNotify = Serializers.values(['bounce', 'none']);
 
 export namespace Nagan {
   export class Access {
@@ -29,10 +44,10 @@ export namespace Nagan {
     @serializable selector: string;
 
     // notify effect
-    @serializable(Serializers.notify) notify = 'bounce';
+    @serializable(asNotify) notify = 'bounce';
 
     @serializable(Serializers.anyType) style: any;
-    @serializable(Serializers.position) position: Widget.Position;
+    @serializable(asPosition) position: Widget.Position;
     @serializable(Serializers.anyType) options: any;
     @serializable(Serializers.anyType) state: any;
 

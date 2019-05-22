@@ -4,12 +4,13 @@
     "module": "commonjs",
     "lib": ["es2017", "es7", "es6", "dom"],
     "declaration": true,
-    "outDir": "dist",
+    "outDir": "lib",
     "strict": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "declarationMap": true
   },
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*"]
 }
