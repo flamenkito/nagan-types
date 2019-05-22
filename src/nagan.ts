@@ -45,6 +45,10 @@ export namespace Nagan {
   }
 
   export namespace Widget {
+    export const STATE_ATTR = 'state';
+    export const INIT_ATTR = 'options';
+    export const EVENT_NAME = 'message';
+
     export class Point {
       @serializable(Serializers.value('point')) type = 'point';
       @serializable x: number;
