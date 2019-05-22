@@ -101,31 +101,34 @@ export namespace Nagan {
         return widget.position;
       }
     }
-  }
 
-  // get list of widget subscriptions or map the state
-  export function getState(widget: Nagan.Widget, sources: TypeDocument[]): any {
-    const widgetSubscriptions = sources.filter(doc => {
-      return widget.subscriptions.includes(doc._id);
-    });
+    // get list of widget subscriptions or map the state
+    export function getState(
+      widget: Nagan.Widget,
+      sources: TypeDocument[]
+    ): any {
+      const widgetSubscriptions = sources.filter(doc => {
+        return widget.subscriptions.includes(doc._id);
+      });
 
-    // no services
-    if (!widgetSubscriptions.length) {
-      return widget.state;
-    }
-
-    try {
-      if (widget.stateMapper) {
-        /* tslint:disable:no-eval */
-        const stateMapper = eval(widget.stateMapper) as Mapper<any>;
-        return stateMapper(widgetSubscriptions);
-        /* tslint:enable:no-eval */
+      // no services
+      if (!widgetSubscriptions.length) {
+        return widget.state;
       }
-    } catch (err) {
-      return widget.state;
-    }
 
-    // defaults
-    return widgetSubscriptions;
+      try {
+        if (widget.stateMapper) {
+          /* tslint:disable:no-eval */
+          const stateMapper = eval(widget.stateMapper) as Mapper<any>;
+          return stateMapper(widgetSubscriptions);
+          /* tslint:enable:no-eval */
+        }
+      } catch (err) {
+        return widget.state;
+      }
+
+      // defaults
+      return widgetSubscriptions;
+    }
   }
 }
