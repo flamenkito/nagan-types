@@ -1,7 +1,9 @@
-import { serializable, list, primitive, custom, deserialize } from 'serializr';
+import { serializable, list, primitive } from 'serializr';
 
-import { ServiceDocument } from './service.document';
 import { Serializers } from './serializers';
+import { TypeDocument } from './type.document';
+
+type Mapper<State> = (subscriptions: TypeDocument[]) => State;
 
 export namespace Nagan {
   export class Access {
@@ -61,5 +63,69 @@ export namespace Nagan {
     }
 
     export type Position = Point | LatLng | Fixed;
+
+    // get widget position or map it from the subscriptions
+    export function getPosition(
+      widget: Widget,
+      sources: TypeDocument[]
+    ): Position {
+      const widgetSubscriptions = sources.filter(doc => {
+        return widget.subscriptions.includes(doc._id);
+      });
+
+      try {
+        if (widget.positionMapper) {
+          /* tslint:disable:no-eval */
+          const center = eval(widget.positionMapper) as Mapper<Position>;
+          return center(widgetSubscriptions);
+          /* tslint:enable:no-eval */
+        }
+
+        // no subscriptions
+        if (widgetSubscriptions.length === 0) {
+          return widget.position;
+        }
+
+        // first subscription contains no center
+        const { center } = widgetSubscriptions[0] as any;
+        if (!center) {
+          return widget.position;
+        }
+
+        if (!center.lat || !center.lng) {
+          throw new Error('Invalid center');
+        }
+
+        return center;
+      } catch (err) {
+        return widget.position;
+      }
+    }
+  }
+
+  // get list of widget subscriptions or map the state
+  export function getState(widget: Nagan.Widget, sources: TypeDocument[]): any {
+    const widgetSubscriptions = sources.filter(doc => {
+      return widget.subscriptions.includes(doc._id);
+    });
+
+    // no services
+    if (!widgetSubscriptions.length) {
+      return widget.state;
+    }
+
+    try {
+      if (widget.stateMapper) {
+        /* tslint:disable:no-eval */
+        const stateMapper = eval(widget.stateMapper) as Mapper<any>;
+        return stateMapper(widgetSubscriptions);
+        /* tslint:enable:no-eval */
+      }
+    } catch (err) {
+      return widget.state;
+    }
+
+    // defaults
+    return widgetSubscriptions;
   }
 }

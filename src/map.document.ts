@@ -4,8 +4,6 @@ import { Nagan } from './nagan';
 import { TypeDocument } from './type.document';
 import { Serializers } from './serializers';
 
-const mapType = Serializers.values('leaflet', 'map');
-
 export class MapDocument implements TypeDocument {
   // TypeDocument
   @serializable _id: string;
