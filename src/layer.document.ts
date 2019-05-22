@@ -15,7 +15,7 @@ export class LayerDocument implements TypeDocument {
   @serializable description: string;
   @serializable icon: string;
 
-  static deserialize(data: Partial<LayerDocument>): LayerDocument {
+  static from(data: Partial<LayerDocument>): LayerDocument {
     return deserialize(LayerDocument, data);
   }
 }

@@ -18,7 +18,7 @@ export class ServiceDocument implements TypeDocument {
   // @serializable(object(Nagan.Center)) center?: Nagan.Center;
   @serializable(Serializers.anyType) meta: any;
 
-  static deserialize(data: Partial<ServiceDocument>): ServiceDocument {
+  static from(data: Partial<ServiceDocument>): ServiceDocument {
     return deserialize(ServiceDocument, data);
   }
 }

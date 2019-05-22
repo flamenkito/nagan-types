@@ -21,7 +21,7 @@ export class MapDocument implements TypeDocument {
 
   @serializable(Serializers.mapOptions) options: MapOptions;
 
-  static deserialize(data: Partial<MapDocument>): MapDocument {
+  static from(data: Partial<MapDocument>): MapDocument {
     return deserialize(MapDocument, data);
   }
 }

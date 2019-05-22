@@ -20,7 +20,7 @@ export class ElementsDocument implements TypeDocument {
   // ServiceDocument
   @serializable(list(object(Element))) elements: Element[];
 
-  static deserialize(data: Partial<ElementsDocument>): ElementsDocument {
+  static from(data: Partial<ElementsDocument>): ElementsDocument {
     return deserialize(ElementsDocument, data);
   }
 }

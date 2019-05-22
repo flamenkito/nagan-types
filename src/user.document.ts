@@ -18,7 +18,7 @@ export class UserDocument implements TypeDocument {
   @serializable avatar: string;
   @serializable(object(Nagan.Access)) access: Nagan.Access;
 
-  static deserialize(data: Partial<UserDocument>): UserDocument {
+  static from(data: Partial<UserDocument>): UserDocument {
     return deserialize(UserDocument, data);
   }
 }
