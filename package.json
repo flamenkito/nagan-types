@@ -1,6 +1,6 @@
 {
   "name": "@asutov/nagan-types",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Nagan document types",
   "scripts": {
     "build": "tsc",

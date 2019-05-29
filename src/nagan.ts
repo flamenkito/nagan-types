@@ -57,6 +57,10 @@ export namespace Nagan {
     @serializable stateMapper?: string;
 
     @serializable(list(primitive())) subscriptions: string[];
+
+    static from(data: Partial<Widget>): Widget {
+      return deserialize(Widget, data);
+    }
   }
 
   export namespace Widget {
