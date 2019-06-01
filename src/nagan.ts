@@ -39,7 +39,6 @@ export namespace Nagan {
     @serializable layerId: string;
     @serializable locked: boolean;
     @serializable scalable: boolean;
-    @serializable dpi: number;
 
     @serializable selector: string;
 
@@ -47,6 +46,7 @@ export namespace Nagan {
     @serializable(asNotify) notify = 'bounce';
 
     @serializable(Serializers.anyType) style: any;
+    @serializable scale: number = 1.0;
     @serializable(asPosition) position: Widget.Position;
     @serializable(Serializers.anyType) options: any;
     @serializable(Serializers.anyType) state: any;
