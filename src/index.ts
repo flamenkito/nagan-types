@@ -1,4 +1,5 @@
 export * from './elements.document';
+export * from './images.document';
 export * from './layer.document';
 export * from './map.document';
 export * from './nagan';
