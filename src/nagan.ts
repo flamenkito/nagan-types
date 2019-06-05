@@ -47,6 +47,7 @@ export namespace Nagan {
 
     @serializable(Serializers.anyType) style: any;
     @serializable scale: number = 1.0;
+    @serializable width: number = 600;
     @serializable(asPosition) position: Widget.Position;
     @serializable(Serializers.anyType) options: any;
     @serializable(Serializers.anyType) state: any;
