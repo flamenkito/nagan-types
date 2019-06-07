@@ -1,9 +1,9 @@
 {
   "name": "@asutov/nagan-types",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Nagan document types",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf lib/ && tsc",
     "watch-build": "tsc -w",
     "watch-node": "nodemon",
     "watch": "tsc && npm-run-all --parallel watch-build watch-node"
