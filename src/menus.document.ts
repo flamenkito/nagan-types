@@ -5,6 +5,7 @@ import { Serializers } from './serializers';
 
 // models
 export class MenuRecord {
+  @serializable id: number;
   @serializable title: string;
   @serializable routerLink: string;
   @serializable href: string;

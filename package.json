@@ -1,6 +1,6 @@
 {
   "name": "@asutov/nagan-types",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Nagan document types",
   "scripts": {
     "build": "rm -rf lib/ && tsc",
