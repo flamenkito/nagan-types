@@ -25,6 +25,9 @@ export class ImagesDocument implements TypeDocument {
 
   // ImagesDocument
   @serializable(list(object(ImageRecord))) images: ImageRecord[];
+  @serializable(list(object(ImageRecord))) maps: ImageRecord[];
+  @serializable(list(object(ImageRecord))) icons: ImageRecord[];
+  @serializable(list(object(ImageRecord))) avatars: ImageRecord[];
 
   static from(data: Partial<ImagesDocument>): ImagesDocument {
     return deserialize(ImagesDocument, data);
