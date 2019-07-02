@@ -12,6 +12,7 @@ export class ServiceDocument implements TypeDocument {
 
   // ServiceDocument
   @serializable state: string;
+  @serializable value: string;
   @serializable(list(object(Nagan.Last))) lasts: Nagan.Last[];
 
   // optional center value moves to meta
