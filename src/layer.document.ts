@@ -8,6 +8,7 @@ export class LayerDocument implements TypeDocument {
   @serializable _id: string;
   @serializable _rev: string;
   @serializable(Serializers.value('layer')) type = 'layer';
+  @serializable _deleted: boolean;
 
   // LayerDocument
   @serializable enabled: boolean;

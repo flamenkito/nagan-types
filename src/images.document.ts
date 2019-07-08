@@ -22,6 +22,7 @@ export class ImagesDocument implements TypeDocument {
   @serializable _id: string;
   @serializable _rev: string;
   @serializable(Serializers.value('images')) type = 'images';
+  @serializable _deleted: boolean;
 
   // ImagesDocument
   @serializable(list(object(ImageRecord))) images: ImageRecord[];

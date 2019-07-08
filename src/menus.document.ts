@@ -25,6 +25,7 @@ export class MenusDocument implements TypeDocument {
   @serializable _id: string;
   @serializable _rev: string;
   @serializable(Serializers.value('menus')) type = 'menus';
+  @serializable _deleted: boolean;
 
   // MenusDocument
   @serializable(list(object(MenuRecord))) menu: MenuRecord[];

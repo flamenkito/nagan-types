@@ -16,7 +16,8 @@ export class ElementsDocument implements TypeDocument {
   @serializable _id: string;
   @serializable _rev: string;
   @serializable(Serializers.value('elements')) type = 'elements';
-
+  @serializable _deleted: boolean;
+  
   // ServiceDocument
   @serializable(list(object(Element))) elements: Element[];
 

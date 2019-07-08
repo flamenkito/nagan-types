@@ -9,6 +9,7 @@ export class UserDocument implements TypeDocument {
   @serializable _id: string;
   @serializable _rev: string;
   @serializable(Serializers.value('user')) type = 'user';
+  @serializable _deleted: boolean;
 
   // UserDocument
   @serializable name: string;

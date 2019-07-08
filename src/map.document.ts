@@ -40,6 +40,7 @@ export class MapDocument implements TypeDocument {
   @serializable _id: string;
   @serializable _rev: string;
   @serializable(Serializers.value('map')) type = 'map';
+  @serializable _deleted: boolean;
 
   // MapDocument
   @serializable enabled: boolean;

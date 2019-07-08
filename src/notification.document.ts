@@ -8,6 +8,7 @@ export class NotificationDocument implements TypeDocument {
   @serializable _id: string;
   @serializable _rev: string;
   @serializable(Serializers.value('notification')) type = 'notification';
+  @serializable _deleted: boolean;
 
   // NotificationDocument
   @serializable(list(primitive())) services: string[];

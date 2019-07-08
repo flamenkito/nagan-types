@@ -9,6 +9,7 @@ export class ServiceDocument implements TypeDocument {
   @serializable _id: string;
   @serializable _rev: string;
   @serializable(Serializers.value('service')) type = 'service';
+  @serializable _deleted: boolean;
 
   // ServiceDocument
   @serializable state: string;
