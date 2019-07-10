@@ -2,6 +2,7 @@ import { serializable, list, primitive, custom, deserialize } from 'serializr';
 
 import { Serializers } from './serializers';
 import { TypeDocument } from './type.document';
+import { ServiceDocument } from './service.document';
 
 type Mapper<State> = (subscriptions: TypeDocument[]) => State;
 
@@ -91,7 +92,7 @@ export namespace Nagan {
     // get widget position or map it from the subscriptions
     export function getPosition(
       widget: Widget,
-      sources: TypeDocument[]
+      sources: ServiceDocument[]
     ): Position {
       const widgetSubscriptions = sources.filter(doc => {
         return widget.subscriptions.includes(doc._id);
@@ -111,10 +112,12 @@ export namespace Nagan {
         }
 
         // first subscription contains no center
-        const { center } = widgetSubscriptions[0] as any;
-        if (!center) {
+        const [sub] = widgetSubscriptions;
+        if (!sub || !sub.meta || !sub.meta.center) {
           return widget.position;
         }
+
+        const { center } = sub.meta;
 
         if (!center.lat || !center.lng) {
           throw new Error('Invalid center');
